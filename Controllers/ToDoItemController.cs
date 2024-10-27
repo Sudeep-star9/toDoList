@@ -24,6 +24,7 @@ namespace toDoList.Controllers
         
         [HttpGet]
         [Authorize(Roles = "Admin")]
+         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> GetAll()
         {
             var items = await _toDoItemService.GetAllAsync();
@@ -34,6 +35,7 @@ namespace toDoList.Controllers
        
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin")]
+         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> GetById(int id)
         {
             var item = await _toDoItemService.GetByIdAsync(id);
@@ -45,6 +47,7 @@ namespace toDoList.Controllers
         
         [HttpPost]
         [Authorize(Roles = "Admin")]
+         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> Create([FromBody] CreateToDoItemDto toDoItemDto)
         {
             var createdItem = await _toDoItemService.CreateAsync(toDoItemDto);
@@ -60,6 +63,7 @@ namespace toDoList.Controllers
        
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
+         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> Update([FromRoute] int id ,[FromBody]UpdateToDoItemDto toDoItemDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -73,6 +77,7 @@ namespace toDoList.Controllers
         
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
+         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             var deletedItem = await _toDoItemService.DeleteAsync(id);

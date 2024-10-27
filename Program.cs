@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Configure JSON options for enum serialization and add global filter
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<ValidateModelAttribute>(); // Register globally
+    options.Filters.Add<ValidateModelAttribute>(); 
 }).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -87,6 +87,7 @@ builder.Services.AddSwaggerGen(c =>
 
     // Add Bearer Token Authentication to Swagger
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                            
     {
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Description = "Please enter the Bearer token",
@@ -124,7 +125,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();  // Ensure authentication middleware is added
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();
